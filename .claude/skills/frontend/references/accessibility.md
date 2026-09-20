@@ -17,6 +17,32 @@ Use the element that already has the right semantics/behavior before reaching fo
 
 ARIA is for filling a genuine semantic gap (a custom widget with no native element — a combobox, a custom slider), not a substitute for using the right element.
 
+### Visually Hidden, Screen-Reader-Only Text
+
+For context a sighted user gets visually (a table's purpose, an icon-only button's action, a section landmark's label) but that shouldn't add visible clutter, use a visually-hidden class rather than `aria-label` everywhere or omitting the context entirely — it keeps the text in the accessibility tree and selectable/translatable, unlike `aria-label` on non-interactive elements:
+
+```scss
+// styles/base/_accessibility.scss — one shared utility, not reinvented per component
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+```
+
+```tsx
+<table>
+  <caption className="sr-only">Employee list, sorted by name</caption>
+  ...
+</table>
+```
+
+A "skip to main content" link at the top of the page (visually hidden until focused) is the same technique applied to keyboard navigation — add one once the page has enough repeated navigation (a header/nav) that skipping it matters.
+
 ## Keyboard Navigation
 
 - Everything operable by mouse must be operable by keyboard: `Tab`/`Shift+Tab` to move focus, `Enter`/`Space` to activate, arrow keys within composite widgets (menus, tabs, radio groups) per the relevant ARIA pattern.

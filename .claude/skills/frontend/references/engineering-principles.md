@@ -59,6 +59,20 @@ const data = keepPreviousData ? previousData : currentData;
 
 Document (in comments, or a short note in the PR/summary — whichever fits): architecture decisions that weren't obvious from the code, non-obvious business rules, performance decisions (why this was memoized when most things aren't), security decisions (why a value is masked/not stored), tricky edge cases, and the contract of a reusable component if it's not self-evident from its prop types.
 
+## Dependencies for Trivial Utilities
+
+DRY/YAGNI applied to dependencies, not just code: before adding a package, check whether the standard library or an already-installed dependency covers it. Don't add a dependency for something a short, obvious helper already solves — a classnames joiner, a basic date formatter, a `capitalize()` — write the few lines instead. Every dependency is attack surface (`security.md`) and a future upgrade/breakage liability, not a free abstraction.
+
+```ts
+// Prefer a small local helper...
+export function cx(...values: Array<string | false | null | undefined>): string {
+  return values.filter(Boolean).join(' ');
+}
+// ...over adding a package for this alone.
+```
+
+This cuts the other way too: don't hand-roll something genuinely non-trivial (date/timezone math, form-schema validation, virtualization) that a well-maintained library already solves correctly — YAGNI is about not building speculative generality, not about refusing real infrastructure.
+
 ## Applying All of This Together
 
 None of these principles override the concrete guidance elsewhere in this skill (the reusability test in `component-design.md`, the memoize-only-with-evidence rule in `performance.md`, the ask-before-assuming rule in `decision-making.md`). They're the reasoning behind those rules — use them to make judgment calls in situations this skill doesn't spell out explicitly, not to argue past the explicit guidance.
