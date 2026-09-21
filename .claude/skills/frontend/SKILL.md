@@ -71,7 +71,7 @@ Load only what the task needs — this file stays the entry point, references ca
 | State management decision | `references/state-management.md` | Choosing local state vs Context vs URL vs server-state vs Redux |
 | Data fetching (Axios/REST/TanStack Query) | `references/data-fetching.md` | HTTP client architecture, service layer, TanStack Query, error normalization |
 | GraphQL | `references/graphql.md` | Project has chosen (or is choosing) GraphQL over REST |
-| Forms | `references/forms.md` | Any form — decision between explicit, field-component, or config-driven |
+| Forms | `references/forms.md` | Any form — decision between explicit, field-component, or config-driven; array-driven mandatory fields, input sanitization, dependent/cascading fields |
 | SCSS & theming | `references/scss.md` | Styling architecture, design tokens, theme, responsive breakpoints |
 | Responsive UI | `references/responsive-ui.md` | Multi-viewport layout, overflow, text scaling |
 | Accessibility | `references/accessibility.md` | Semantic HTML, keyboard nav, focus, ARIA, forms/dialogs a11y |
@@ -86,6 +86,7 @@ Load only what the task needs — this file stays the entry point, references ca
 ### MUST DO
 - Ask before assuming any project-specific decision: framework/React version, TypeScript, state library, REST vs GraphQL, CSS approach, design system, test framework, API contract shape. See `references/decision-making.md`.
 - Apply the reusability test before creating a shared component, hook, or abstraction (`references/component-design.md`).
+- Drive a form's required/mandatory indicators and base validation from one shared array/config, never a hardcoded `required`/`isMandatory` per field (`references/forms.md`).
 - Keep business logic out of common/shared UI components.
 - Route all HTTP calls through a service layer, never inline `fetch`/`axios` in components (`references/data-fetching.md`).
 - Implement loading, error (with retry), and empty states for every async view.
