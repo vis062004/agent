@@ -1,0 +1,33 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-4;
+}
+
+.login-page__card {
+  @include card;
+  width: 100%;
+  max-width: 360px;
+  padding: $space-8 $space-6;
+
+  h1 {
+    margin: 0 0 $space-1;
+    font-size: $font-size-lg;
+  }
+}
+
+.login-page__subtitle {
+  margin: 0 0 $space-6;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+.login-page__submit {
+  width: 100%;
+  margin-top: $space-2;
+}

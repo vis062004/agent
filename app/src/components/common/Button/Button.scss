@@ -1,0 +1,48 @@
+@use '../../../styles/variables' as *;
+
+.button {
+  font: inherit;
+  font-weight: 600;
+  padding: $space-2 $space-4;
+  border-radius: $radius-sm;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.button--primary {
+  background: $color-primary;
+  color: $color-surface;
+
+  &:hover:not(:disabled) {
+    background: $color-primary-dark;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary-dark;
+    outline-offset: 2px;
+  }
+}
+
+.button--secondary {
+  background: transparent;
+  color: $color-text-muted;
+  border: 1px solid $color-border;
+
+  &:hover:not(:disabled) {
+    background: $color-surface;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+}
+
+.button--full {
+  width: 100%;
+}

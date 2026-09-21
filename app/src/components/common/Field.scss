@@ -1,0 +1,66 @@
+@use '../../styles/variables' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  margin-bottom: $space-4;
+
+  &__label {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $color-text;
+  }
+
+  &__control {
+    font: inherit;
+    padding: $space-2 $space-3;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    background: $color-surface;
+    color: $color-text;
+
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 1px;
+    }
+
+    &[aria-invalid='true'] {
+      border-color: $color-danger;
+    }
+  }
+
+  textarea.field__control {
+    resize: vertical;
+    min-height: 96px;
+  }
+
+  &__error {
+    margin: 0;
+    font-size: $font-size-sm;
+    color: $color-danger;
+  }
+
+  &__radio-group {
+    display: flex;
+    gap: $space-4;
+    flex-wrap: wrap;
+  }
+
+  &__radio-option {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    font-weight: 400;
+  }
+}
+
+.form__error-banner {
+  background: #fef2f2;
+  border: 1px solid $color-danger;
+  color: $color-danger;
+  border-radius: $radius-sm;
+  padding: $space-3;
+  margin-bottom: $space-4;
+  font-size: $font-size-sm;
+}

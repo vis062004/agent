@@ -1,0 +1,72 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.request-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: $space-6 $space-4;
+
+  @include respond-above($breakpoint-sm) {
+    padding: $space-8 $space-4;
+  }
+}
+
+.request-page__card {
+  @include card;
+  width: 100%;
+  max-width: 560px;
+  padding: $space-6;
+
+  @include respond-above($breakpoint-sm) {
+    padding: $space-8;
+  }
+}
+
+.request-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: $space-4;
+  margin-bottom: $space-6;
+
+  h1 {
+    margin: 0 0 $space-1;
+    font-size: $font-size-lg;
+  }
+}
+
+.request-page__subtitle {
+  margin: 0;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+}
+
+.request-page__radio-group {
+  display: flex;
+  gap: $space-4;
+  flex-wrap: wrap;
+}
+
+.request-page__radio-option {
+  display: flex;
+  align-items: center;
+  gap: $space-1;
+  font-weight: 400;
+}
+
+.request-page__success {
+  text-align: center;
+
+  h1 {
+    margin: 0 0 $space-2;
+    font-size: $font-size-lg;
+    color: $color-success;
+  }
+
+  p {
+    color: $color-text-muted;
+    margin: 0 0 $space-6;
+  }
+}
