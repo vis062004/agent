@@ -45,8 +45,16 @@ actually needed — don't pre-build them speculatively.
   persistence** of submitted requests (not localStorage, no backend). "Submit Another
   Request" resets the form.
 - Folder structure: hybrid/feature-based — `app/src/features/auth/`,
-  `app/src/features/requests/`, shared `app/src/styles/` (SCSS tokens/mixins) and
-  `app/src/utils/`.
+  `app/src/features/requests/`, shared `app/src/styles/` (SCSS tokens/mixins),
+  `app/src/utils/`, and `app/src/components/common/` (see below).
+- Shared field components (`component-design.md`'s reusability test: login + request form
+  both need the label/control/error/a11y contract, so it's a real 2-call-site abstraction,
+  not premature): `components/common/{Button,TextField,SelectField,TextAreaField,
+  RadioGroupField}` + barrel `components/common/index.ts`. Each owns its own scoped SCSS
+  (`Button.scss`, shared `Field.scss` for the four field components) — no business
+  logic/feature imports inside `components/common`, per the skill's constraints. Both
+  `LoginPage` and `RequestFormPage` are built from these rather than raw `<input>`/`<button>`
+  JSX.
 - Verified end-to-end with Playwright against `vite preview`: wrong-credentials error,
   successful login, empty-form validation (5 errors), successful submit, and
   refresh-persists-login. Playwright itself was a throwaway dev dependency, not added to
@@ -58,6 +66,12 @@ None currently pending.
 
 ## Recent Changes
 
+- 2026-09-21 — Refactored the first-slice form UI to use shared `components/common/` field
+  components (`Button`, `TextField`, `SelectField`, `TextAreaField`, `RadioGroupField`)
+  instead of inline JSX in `LoginPage`/`RequestFormPage`, per `component-design.md`'s
+  reusability test (2 genuine call sites) — the initial version had skipped this. Re-verified
+  with the same Playwright flow; unchanged behavior. PR #1 not yet re-pushed — pending user
+  review.
 - 2026-09-21 — Built the Access Request & Approval System's first slice (see Confirmed
   Project Decisions above) in `app/`: `AuthProvider`/`useAuth`, `ProtectedRoute`,
   `LoginPage`, `RequestFormPage` + validation module, SCSS tokens/mixins/base styles,

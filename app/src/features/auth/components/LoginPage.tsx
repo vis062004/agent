@@ -1,14 +1,13 @@
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { Button, TextField } from '../../../components/common';
 import '../LoginPage.scss';
 
 export function LoginPage() {
   const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const usernameId = useId();
-  const passwordId = useId();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -42,35 +41,29 @@ export function LoginPage() {
           </p>
         )}
 
-        <div className="field">
-          <label htmlFor={usernameId}>Username</label>
-          <input
-            id={usernameId}
-            name="username"
-            type="text"
-            autoComplete="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
+        <TextField
+          label="Username"
+          name="username"
+          type="text"
+          autoComplete="username"
+          value={username}
+          onChange={setUsername}
+          required
+        />
 
-        <div className="field">
-          <label htmlFor={passwordId}>Password</label>
-          <input
-            id={passwordId}
-            name="password"
-            type="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <TextField
+          label="Password"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          value={password}
+          onChange={setPassword}
+          required
+        />
 
-        <button type="submit" className="button login-page__submit">
+        <Button type="submit" fullWidth className="login-page__submit">
           Log In
-        </button>
+        </Button>
       </form>
     </main>
   );
